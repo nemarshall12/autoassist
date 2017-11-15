@@ -104,14 +104,14 @@ public class SommersWebhookRestController {
 	}
 	
 	private void sendAppointmentEmail(WebhookRequest input) {
-		ContextOut appointment = input.getResult().getContext("Schedule-Appointment-followup");
+		ContextOut appointment = input.getResult().getContext("schedule-appointment-followup");
 		String serviceType = appointment.getParameters().get("Car-Service-Type");
 		String carModel = appointment.getParameters().get("Car-Model");
 		String carMake = appointment.getParameters().get("Car-Make");
 		String date = appointment.getParameters().get("date");
 		String time = appointment.getParameters().get("time");
 		
-		String messageBody = "You have a new interested buyer who has interacted with Auto Assist."
+		String messageBody = "You have a new service request initiated through Auto Assist."
 				+ "\n\n"
 				+ "Service Type : " + serviceType
 				+ "\nMake: " + carModel
@@ -217,7 +217,8 @@ public class SommersWebhookRestController {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("autoassist@sommerscars.com"));
 			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse("scottlorenz50@gmail.com"));
+					InternetAddress.parse("nicholasemarshall@gmail.com"));
+				//InternetAddress.parse("scottlorenz50@gmail.com"));
 			message.setSubject(subject);
 			message.setText(messageContent);
 
